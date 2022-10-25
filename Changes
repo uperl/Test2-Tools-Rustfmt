@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix bug where Makefile.PL would happily not exit 0
+    when rustfmt and cargo are not available (gh#3, gh#4)
 
 0.02      2022-10-25 07:26:23 -0600
   - Added missing synopsis (gh#2)
