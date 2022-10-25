@@ -70,6 +70,13 @@ package Test2::Tools::Rustfmt {
 
 =head1 SYNOPSIS
 
+ use Test2::V0;
+ use Test2::Tools::Rustfmt;
+ 
+ cargo_fmt_ok;
+ 
+ done_testing;
+
 =head1 DESCRIPTION
 
 These test tools work with C<rustfmt> and C<cargo fmt> to ensure that any
