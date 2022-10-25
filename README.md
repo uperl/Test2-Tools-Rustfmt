@@ -24,7 +24,21 @@ rustfmt_ok \@files;
 ```
 
 Tests the given rust files to see if they are formatted according to the
-style guidelines.
+Rust style guidelines.
+
+## cargo\_fmt\_ok
+
+```
+cargo_fmt_ok $dir, $test_name;
+cargo_fmt_ok $dir;
+cargo_fmt_ok;
+```
+
+Tests the rust crate in the given directory to see if they are formatted
+according to the Rust style guidelines.  If no directory is given, and
+if a `ffi` directory exists, then that will be used.  This works
+nicely with [FFI::Build](https://metacpan.org/pod/FFI::Build) and [FFI::Build::File::Cargo](https://metacpan.org/pod/FFI::Build::File::Cargo) when writing
+Perl extensions in Rust.
 
 # AUTHOR
 
