@@ -34,7 +34,7 @@ package Test2::Tools::Rustfmt {
     }
     else
     {
-      context()->fail_and_release($name, ["+@command", $out]);
+      context()->fail_and_release($name, "+@command", $out);
       return '';
     }
   }
@@ -60,7 +60,7 @@ package Test2::Tools::Rustfmt {
     }
     else
     {
-      context()->fail_and_release($name, ["+cd $dir", "+@command", $out]);
+      context()->fail_and_release($name, "+cd $dir", "+@command", $out);
       return '';
     }
   }

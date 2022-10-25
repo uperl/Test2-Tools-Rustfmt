@@ -24,8 +24,10 @@ subtest rustfmt_ok => sub {
 
   subtest 'bad' => sub {
 
+    my $x;
+
     is
-      intercept { $exit = rustfmt_ok 'corpus/rustbad.rs' },
+      $x = intercept { $exit = rustfmt_ok 'corpus/rustbad.rs' },
       array {
         event Fail => sub {
           call name => 'rustfmt corpus/rustbad.rs';
@@ -33,10 +35,12 @@ subtest rustfmt_ok => sub {
             field info => array {
               item hash sub {
                 field tag => 'DIAG';
-                field details => array {
-                  item match qr{rustfmt --check corpus/rustbad.rs};
-                  item match qr{rustbad.rs};
-                };
+                field details => match qr{rustfmt --check corpus/rustbad.rs};
+                etc;
+              };
+              item hash sub {
+                field tag => 'DIAG';
+                field details => match qr{rustbad.rs};
                 etc;
               };
               etc;
@@ -101,11 +105,17 @@ subtest cargo_fmt_ok => sub {
             field info => array {
               item hash sub {
                 field tag => 'DIAG';
-                field details => array {
-                  item match qr{\+cd corpus/cargobad};
-                  item match qr{cargo fmt};
-                  item match qr{main.rs};
-                };
+                field details => match qr{\+cd corpus/cargobad};
+                etc;
+              };
+              item hash sub {
+                field tag => 'DIAG';
+                field details => match qr{cargo fmt};
+                etc;
+              };
+              item hash sub {
+                field tag => 'DIAG';
+                field details => match qr{main.rs};
                 etc;
               };
               etc;
