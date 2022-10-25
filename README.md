@@ -4,6 +4,15 @@ Test that bundled Rust code is formatted according to Rust style guidelines
 
 # SYNOPSIS
 
+```perl
+use Test2::V0;
+use Test2::Tools::Rustfmt;
+
+cargo_fmt_ok;
+
+done_testing;
+```
+
 # DESCRIPTION
 
 These test tools work with `rustfmt` and `cargo fmt` to ensure that any
