@@ -13,6 +13,7 @@ $modules{$_} = $_ for qw(
   Capture::Tiny
   ExtUtils::MakeMaker
   File::Which
+  File::chdir
   Test2::API
   Test2::V0
 );

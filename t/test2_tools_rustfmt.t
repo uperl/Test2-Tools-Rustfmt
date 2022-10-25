@@ -1,12 +1,14 @@
 use Test2::V0 -no_srand => 1;
 use Test2::Tools::Rustfmt;
 
+my $exit;
+
 subtest rustfmt_ok => sub {
 
   subtest 'good' => sub {
 
     is
-      intercept { rustfmt_ok 'corpus/rustgood.rs' },
+      intercept { $exit = rustfmt_ok 'corpus/rustgood.rs' },
       array {
         event Pass => sub {
           call name => 'rustfmt corpus/rustgood.rs';
@@ -14,12 +16,16 @@ subtest rustfmt_ok => sub {
         end;
       };
 
+    is
+      $exit,
+      T();
+
   };
 
   subtest 'bad' => sub {
 
     is
-      intercept { rustfmt_ok 'corpus/rustbad.rs' },
+      intercept { $exit = rustfmt_ok 'corpus/rustbad.rs' },
       array {
         event Fail => sub {
           call name => 'rustfmt corpus/rustbad.rs';
@@ -41,18 +47,78 @@ subtest rustfmt_ok => sub {
         end;
       };
 
+    is
+      $exit,
+      F();
+
   };
 
   subtest 'list' => sub {
 
     is
-      intercept { rustfmt_ok ['corpus/rustbad.rs','corpus/rustgood.rs'] },
+      intercept { $exit = rustfmt_ok ['corpus/rustbad.rs','corpus/rustgood.rs'] },
       array {
         event Fail => sub {
           call name => 'rustfmt corpus/rustbad.rs corpus/rustgood.rs';
         };
         end;
       };
+
+    is
+      $exit,
+      F();
+  };
+
+};
+
+subtest cargo_fmt_ok => sub {
+
+  subtest 'good' => sub {
+
+    is
+      intercept { $exit = cargo_fmt_ok 'corpus/cargogood' },
+      array {
+        event Pass => sub {
+          call name => 'cargo fmt for corpus/cargogood';
+        };
+        end;
+      };
+
+    is
+      $exit,
+      T();
+
+  };
+
+  subtest 'bad' => sub {
+
+    is
+      intercept { $exit = cargo_fmt_ok 'corpus/cargobad' },
+      array {
+        event Fail => sub {
+          call name => 'cargo fmt for corpus/cargobad';
+          call facet_data => hash {
+            field info => array {
+              item hash sub {
+                field tag => 'DIAG';
+                field details => array {
+                  item match qr{\+cd corpus/cargobad};
+                  item match qr{cargo fmt};
+                  item match qr{main.rs};
+                };
+                etc;
+              };
+              etc;
+            };
+            etc;
+          };
+        };
+        end;
+      };
+
+    is
+      $exit,
+      F();
 
   };
 
