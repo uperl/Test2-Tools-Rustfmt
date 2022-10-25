@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.02      2022-10-25 07:26:23 -0600
+  - Added missing synopsis (gh#2)
+
 0.01      2022-10-25 06:51:07 -0600
   - initial version
 
