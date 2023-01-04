@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fix bug where tool could fail if more than one rustfmt
+    or cargo is in the PATH (gh#5, gh#6)
 
 0.03      2022-10-25 13:46:22 -0600
   - Fix bug where Makefile.PL would happily not exit 0

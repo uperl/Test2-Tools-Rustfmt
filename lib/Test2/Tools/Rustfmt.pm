@@ -22,7 +22,8 @@ package Test2::Tools::Rustfmt {
 
     $name //= "rustfmt @$files";
 
-    my @command = (which('rustfmt'), '--check', $files->@*);
+    my $exe = which 'rustfmt';
+    my @command = ($exe, '--check', $files->@*);
     my($out, $exit) = capture_merged {
       system @command;
     };
@@ -47,7 +48,8 @@ package Test2::Tools::Rustfmt {
 
     $name //= "cargo fmt for $dir";
 
-    my @command = (which('cargo'), 'fmt', '--check');
+    my $exe = which 'cargo';
+    my @command = ($exe, 'fmt', '--check');
     my($out, $exit) = capture_merged {
       local $CWD = $dir;
       system @command;
