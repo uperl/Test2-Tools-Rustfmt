@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.05      2023-01-04 16:20:36 -0700
   - Fix bug where tool could fail if more than one rustfmt
     or cargo is in the PATH (gh#5, gh#6)
 
